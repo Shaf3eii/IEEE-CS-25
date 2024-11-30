@@ -41,21 +41,16 @@ using namespace std;
 void Erz3() {
     int n;
     cin >> n;
-    auto checkLucky = [](int x)->bool {
-        while (x > 0) {
-            int y = x % 10;
-            x /= 10;
-            if (y != 4 && y != 7)
-                return false;
-        }
-        return true;
-    };
-    if (checkLucky(n)) retv("YES\n");
-    for (int i = 4 ; i <= n ; ++i) {
-        if (checkLucky(i) && n % i == 0)
-            retv("YES\n");
+    string directions;
+    cin >> directions;
+    vi val(n);
+    int Min = INF;
+    for (int i = 0 ; i < n ; ++i) cin >> val[i];
+    for (int i = 0 ; i < sz(directions) - 1; ++i) {
+        if (directions[i] == 'R' and directions[i + 1] == 'L')
+            Min = min(Min, (val[i + 1] - val[i]) / 2);
     }
-    cout << "NO\n";
+    cout << (Min != INF ? Min : -1);
 }
 
 signed main() {
