@@ -39,23 +39,29 @@ using namespace std;
 //const int N = 2e5+ 5;
 
 void Erz3() {
-    int n;
-    cin >> n;
-    auto checkLucky = [](int x)->bool {
-        while (x > 0) {
-            int y = x % 10;
-            x /= 10;
-            if (y != 4 && y != 7)
-                return false;
+    string keyboard[3];
+    keyboard[0] = "qwertyuiop";
+    keyboard[1] = "asdfghjkl;";
+    keyboard[2] = "zxcvbnm,./";
+    char dir;
+    string word;
+    cin >> dir >> word;
+    for(char i : word)
+    {
+        for(auto & j : keyboard)
+        {
+            for(int k = 0 ; k < 10 ; ++k)
+            {
+                if(j[k] == i)
+                {
+                    if(dir == 'R')
+                        cout << j[k - 1];
+                    else
+                        cout << j[k + 1];
+                }
+            }
         }
-        return true;
-    };
-    if (checkLucky(n)) retv("YES\n");
-    for (int i = 4 ; i <= n ; ++i) {
-        if (checkLucky(i) && n % i == 0)
-            retv("YES\n");
     }
-    cout << "NO\n";
 }
 
 signed main() {
